@@ -9,9 +9,9 @@ Mini project untuk simulasi monitoring server dan bandwidth.
 - Simulasi data: tombol generate logs & toggle status
 
 ## Teknologi
-- Backend: Laravel
-- Frontend: React
-- Database: MySQL
+- Backend: -
+- Frontend: -
+- Database: -
 
 ## Progress
 - [ ] Migrasi database
