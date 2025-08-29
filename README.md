@@ -14,8 +14,8 @@ Mini project untuk simulasi monitoring server dan bandwidth.
 - Database: MySQL
 
 ## Progress
-- [] Migrasi database
-- [] Seeder sample data
+- [ ] Migrasi database
+- [ ] Seeder sample data
 - [ ] CRUD server
 - [ ] Dashboard dan grafik
 
