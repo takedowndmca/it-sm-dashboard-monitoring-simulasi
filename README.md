@@ -20,4 +20,4 @@ Mini project untuk simulasi monitoring server dan bandwidth.
 - [ ] Dashboard dan grafik
 
 ## Developer
-Yudha - Kalla Institute
+Muhammad Farid Jazir Fadhlurrahman - Universitas Islam Makassar
