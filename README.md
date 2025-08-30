@@ -9,12 +9,12 @@ Mini project untuk simulasi monitoring server dan bandwidth.
 - Simulasi data: tombol generate logs & toggle status
 
 ## Teknologi
-- Backend: -
+- Backend: expressjs
 - Frontend: -
-- Database: -
+- Database: mysql
 
 ## Progress
-- [ ] Migrasi database
+- [x] Migrasi database
 - [ ] Seeder sample data
 - [ ] CRUD server
 - [ ] Dashboard dan grafik
