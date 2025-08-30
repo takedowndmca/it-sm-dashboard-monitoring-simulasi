@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><title>Edit Server</title></head>
+<body>
+  <h1>Edit Server</h1>
+  <form method="POST" action="/servers/edit/<%= server.id %>">
+    <input name="name" value="<%= server.name %>" required><br>
+    <input name="ip" value="<%= server.ip %>" required><br>
+    <input name="location" value="<%= server.location %>" required><br>
+    <input name="service_type" value="<%= server.service_type %>" required><br>
+    <select name="status">
+      <option value="UP" <%= server.status === 'UP' ? 'selected' : '' %>>UP</option>
+      <option value="DOWN" <%= server.status === 'DOWN' ? 'selected' : '' %>>DOWN</option>
+      <option value="MAINT" <%= server.status === 'MAINT' ? 'selected' : '' %>>MAINT</option>
+    </select><br>
+    <button type="submit">Update</button>
+  </form>
+</body>
+</html>

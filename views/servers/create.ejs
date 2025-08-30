@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html>
+<head><title>Tambah Server</title></head>
+<body>
+  <h1>Tambah Server</h1>
+  <form method="POST" action="/servers/create">
+    <input name="name" placeholder="Nama" required><br>
+    <input name="ip" placeholder="IP Address" required><br>
+    <input name="location" placeholder="Lokasi" required><br>
+    <input name="service_type" placeholder="Layanan" required><br>
+    <select name="status">
+      <option value="UP">UP</option>
+      <option value="DOWN">DOWN</option>
+      <option value="MAINT">MAINT</option>
+    </select><br>
+    <button type="submit">Simpan</button>
+  </form>
+</body>
+</html>

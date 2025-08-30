@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Server List</title>
+</head>
+<body>
+  <h1>Daftar Server</h1>
+  <a href="/servers/create">+ Tambah Server</a>
+  <table border="1">
+    <tr>
+      <th>Nama</th>
+      <th>IP</th>
+      <th>Lokasi</th>
+      <th>Layanan</th>
+      <th>Status</th>
+      <th>Aksi</th>
+    </tr>
+    <% servers.forEach(s => { %>
+      <tr>
+        <td><%= s.name %></td>
+        <td><%= s.ip %></td>
+        <td><%= s.location %></td>
+        <td><%= s.service_type %></td>
+        <td><%= s.status %></td>
+        <td>
+          <a href="/servers/edit/<%= s.id %>">Edit</a>
+          <form action="/servers/delete/<%= s.id %>" method="POST" style="display:inline;">
+            <button type="submit">Hapus</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
+</body>
+</html>
