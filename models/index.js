@@ -40,4 +40,16 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+// Import models
+db.Server = require('./server')(sequelize, Sequelize.DataTypes);
+db.Check = require('./check')(sequelize, Sequelize.DataTypes);
+db.Incident = require('./incident')(sequelize, Sequelize.DataTypes);
+
+// Define associations
+db.Server.hasMany(db.Check, { foreignKey: 'server_id' });
+db.Check.belongsTo(db.Server, { foreignKey: 'server_id' });
+
+db.Server.hasMany(db.Incident, { foreignKey: 'server_id' });
+db.Incident.belongsTo(db.Server, { foreignKey: 'server_id' });
+
 module.exports = db;

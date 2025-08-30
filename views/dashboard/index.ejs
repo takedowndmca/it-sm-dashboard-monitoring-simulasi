@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard Monitoring</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/moment"></script>
+</head>
+<body>
+  <h1>Dashboard Monitoring</h1>
+
+  <!-- KPI -->
+  <h3>KPI Ringkas</h3>
+  <ul>
+    <li>Total Server: <%= totalServers %></li>
+    <li>Server UP: <%= upServers %></li>
+    <li>Server DOWN: <%= downServers %></li>
+    <li>Server MAINT: <%= maintServers %></li>
+  </ul>
+
+  <!-- Grafik Response Time 24 Jam -->
+  <h3>Grafik Response Time 24 Jam</h3>
+  <canvas id="responseTimeChart" width="400" height="200"></canvas>
+  
+  <script>
+    const responseTimeData = <%- JSON.stringify(checks) %>;
+
+    const ctx = document.getElementById('responseTimeChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: responseTimeData.map(data => data.time),
+        datasets: [{
+          label: 'Response Time (ms)',
+          data: responseTimeData.map(data => data.responseTime),
+          borderColor: 'rgba(75, 192, 192, 1)',
+          fill: false,
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: { type: 'category' },
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+
+  <!-- Pie Chart Status Server -->
+  <h3>Distribusi Status Server</h3>
+  <canvas id="statusPieChart" width="400" height="200"></canvas>
+
+  <script>
+    const statusCounts = <%- JSON.stringify(statusCounts) %>;
+
+    const ctxPie = document.getElementById('statusPieChart').getContext('2d');
+    new Chart(ctxPie, {
+      type: 'pie',
+      data: {
+        labels: ['UP', 'DOWN', 'MAINT'],
+        datasets: [{
+          label: 'Status Server',
+          data: [statusCounts.UP, statusCounts.DOWN, statusCounts.MAINT],
+          backgroundColor: ['green', 'red', 'yellow'],
+        }]
+      }
+    });
+  </script>
+
+  <!-- Recent Incidents -->
+  <h3>Recent Incidents</h3>
+  <table border="1" cellpadding="8" cellspacing="0">
+    <tr>
+      <th>Server</th>
+      <th>Started At</th>
+      <th>Ended At</th>
+      <th>Notes</th>
+    </tr>
+    <% incidents.forEach(incident => { %>
+      <tr>
+        <td><%= incident.Server.name %></td> <!-- Perbaiki ini -->
+        <td><%= moment(incident.started_at).format('YYYY-MM-DD HH:mm') %></td>
+        <td><%= incident.ended_at ? moment(incident.ended_at).format('YYYY-MM-DD HH:mm') : 'Ongoing' %></td>
+        <td><%= incident.notes %></td>
+      </tr>
+    <% }) %>
+  </table>
+</body>
+</html>
