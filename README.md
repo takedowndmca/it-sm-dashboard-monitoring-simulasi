@@ -96,8 +96,17 @@ Buka di browser: `http://localhost:3000/servers/dashboard`
 | `/servers/create`    | Form tambah server             |
 | `/servers/dashboard` | Dashboard monitoring real-time |
 
-> Tambahkan screenshot nanti di GitHub untuk memperkuat dokumentasi.
-
+### Daftar Server
+![Screenshot Proyek](screenshots/daftar-server.png)
+---
+### Dashboard Monitoring
+![Screenshot Proyek](screenshots/dashboard-monitoring.png)
+---
+### Edit Server
+![Screenshot Proyek](screenshots/edit-server.png)
+---
+### Tambah Server
+![Screenshot Proyek](screenshots/tambah-server.png)
 ---
 
 ## 📁 Struktur Folder
