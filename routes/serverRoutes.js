@@ -1,6 +1,40 @@
 const express = require('express');
 const router = express.Router();
-const { Server } = require('../models');
+// const { Server } = require('../models');
+
+const { Server, Check } = require('../models');
+
+// POST: Toggle Status
+router.post('/toggle-status/:id', async (req, res) => {
+  const server = await Server.findByPk(req.params.id);
+  if (!server) return res.redirect('/servers');
+
+  const statusCycle = ['UP', 'DOWN', 'MAINT'];
+  const nextStatus = statusCycle[(statusCycle.indexOf(server.status) + 1) % 3];
+
+  await server.update({ status: nextStatus });
+
+  res.redirect('/servers');
+});
+
+// POST: Generate Sample Logs (for all servers)
+router.post('/generate-sample-logs', async (req, res) => {
+  const servers = await Server.findAll();
+  const now = new Date();
+
+  for (const server of servers) {
+    const isDown = server.status === 'DOWN';
+    await Check.create({
+      server_id: server.id,
+      status: server.status,
+      response_time_ms: isDown ? null : Math.floor(Math.random() * 500),
+      checked_at: now
+    });
+  }
+
+  res.redirect('/servers');
+});
+
 
 // GET: Semua server
 router.get('/', async (req, res) => {

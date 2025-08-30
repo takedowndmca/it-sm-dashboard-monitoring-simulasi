@@ -5,8 +5,14 @@
 </head>
 <body>
   <h1>Daftar Server</h1>
+
   <a href="/servers/create">+ Tambah Server</a>
-  <table border="1">
+
+  <form action="/servers/generate-sample-logs" method="POST" style="margin-top: 10px;">
+    <button type="submit">🚀 Generate Sample Logs</button>
+  </form> 
+
+  <table border="1" cellpadding="8" cellspacing="0" style="margin-top: 20px;">
     <tr>
       <th>Nama</th>
       <th>IP</th>
@@ -24,6 +30,11 @@
         <td><%= s.status %></td>
         <td>
           <a href="/servers/edit/<%= s.id %>">Edit</a>
+          
+          <form action="/servers/toggle-status/<%= s.id %>" method="POST" style="display:inline;">
+            <button type="submit">Toggle</button>
+          </form>
+
           <form action="/servers/delete/<%= s.id %>" method="POST" style="display:inline;">
             <button type="submit">Hapus</button>
           </form>
