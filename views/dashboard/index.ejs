@@ -1,26 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Monitoring</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/moment"></script>
 </head>
 <body>
-  <h1>Dashboard Monitoring</h1>
+  <div class="container mt-4">
+    <h1 class="text-center mb-4">Dashboard Monitoring</h1>
 
-  <!-- KPI -->
-  <h3>KPI Ringkas</h3>
-  <ul>
-    <li>Total Server: <%= totalServers %></li>
-    <li>Server UP: <%= upServers %></li>
-    <li>Server DOWN: <%= downServers %></li>
-    <li>Server MAINT: <%= maintServers %></li>
-  </ul>
+    <!-- KPI -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h3>KPI Ringkas</h3>
+        <ul class="list-group">
+          <li class="list-group-item">Total Server: <%= totalServers %></li>
+          <li class="list-group-item">Server UP: <%= upServers %></li>
+          <li class="list-group-item">Server DOWN: <%= downServers %></li>
+          <li class="list-group-item">Server MAINT: <%= maintServers %></li>
+        </ul>
+      </div>
+    </div>
 
-  <!-- Grafik Response Time 24 Jam -->
-  <h3>Grafik Response Time 24 Jam</h3>
-  <canvas id="responseTimeChart" width="400" height="200"></canvas>
-  
+    <!-- Grafik Response Time 24 Jam -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h3>Grafik Response Time 24 Jam</h3>
+        <canvas id="responseTimeChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+    
+    <!-- Pie Chart Status Server -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h3>Distribusi Status Server</h3>
+        <canvas id="statusPieChart" width="400" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- Recent Incidents -->
+    <div class="card">
+      <div class="card-body">
+        <h3>Recent Incidents</h3>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Server</th>
+              <th>Started At</th>
+              <th>Ended At</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% incidents.forEach(incident => { %>
+              <tr>
+                <td><%= incident.Server.name %></td>
+                <td><%= moment(incident.started_at).format('YYYY-MM-DD HH:mm') %></td>
+                <td><%= incident.ended_at ? moment(incident.ended_at).format('YYYY-MM-DD HH:mm') : 'Ongoing' %></td>
+                <td><%= incident.notes %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+  <!-- Chart.js Initialization -->
   <script>
     const responseTimeData = <%- JSON.stringify(checks) %>;
 
@@ -44,13 +101,7 @@
         }
       }
     });
-  </script>
 
-  <!-- Pie Chart Status Server -->
-  <h3>Distribusi Status Server</h3>
-  <canvas id="statusPieChart" width="400" height="200"></canvas>
-
-  <script>
     const statusCounts = <%- JSON.stringify(statusCounts) %>;
 
     const ctxPie = document.getElementById('statusPieChart').getContext('2d');
@@ -66,24 +117,5 @@
       }
     });
   </script>
-
-  <!-- Recent Incidents -->
-  <h3>Recent Incidents</h3>
-  <table border="1" cellpadding="8" cellspacing="0">
-    <tr>
-      <th>Server</th>
-      <th>Started At</th>
-      <th>Ended At</th>
-      <th>Notes</th>
-    </tr>
-    <% incidents.forEach(incident => { %>
-      <tr>
-        <td><%= incident.Server.name %></td> <!-- Perbaiki ini -->
-        <td><%= moment(incident.started_at).format('YYYY-MM-DD HH:mm') %></td>
-        <td><%= incident.ended_at ? moment(incident.ended_at).format('YYYY-MM-DD HH:mm') : 'Ongoing' %></td>
-        <td><%= incident.notes %></td>
-      </tr>
-    <% }) %>
-  </table>
 </body>
 </html>

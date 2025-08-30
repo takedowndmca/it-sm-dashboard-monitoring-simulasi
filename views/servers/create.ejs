@@ -1,20 +1,55 @@
-
 <!DOCTYPE html>
-<html>
-<head><title>Tambah Server</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tambah Server</title>
+
+  <!-- Link Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
 <body>
-  <h1>Tambah Server</h1>
-  <form method="POST" action="/servers/create">
-    <input name="name" placeholder="Nama" required><br>
-    <input name="ip" placeholder="IP Address" required><br>
-    <input name="location" placeholder="Lokasi" required><br>
-    <input name="service_type" placeholder="Layanan" required><br>
-    <select name="status">
-      <option value="UP">UP</option>
-      <option value="DOWN">DOWN</option>
-      <option value="MAINT">MAINT</option>
-    </select><br>
-    <button type="submit">Simpan</button>
-  </form>
+
+  <div class="container">
+    <h1 class="my-4">Tambah Server</h1>
+    
+    <!-- Form untuk tambah server -->
+    <form method="POST" action="/servers/create">
+      <div class="mb-3">
+        <label for="name" class="form-label">Nama Server</label>
+        <input type="text" name="name" id="name" class="form-control" placeholder="Nama Server" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="ip" class="form-label">IP Address</label>
+        <input type="text" name="ip" id="ip" class="form-control" placeholder="IP Address" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="location" class="form-label">Lokasi</label>
+        <input type="text" name="location" id="location" class="form-control" placeholder="Lokasi" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="service_type" class="form-label">Layanan</label>
+        <input type="text" name="service_type" id="service_type" class="form-control" placeholder="Layanan" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select name="status" id="status" class="form-select">
+          <option value="UP">UP</option>
+          <option value="DOWN">DOWN</option>
+          <option value="MAINT">MAINT</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Simpan</button>
+      <a href="/servers" class="btn btn-secondary ms-2">Batal</a>
+    </form>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
